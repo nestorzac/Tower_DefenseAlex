@@ -15,7 +15,7 @@ public class Gun : MonoBehaviour
 
     private EnemyTarget _target;
 
-    private void OTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (_target == null && other.CompareTag(_targetTag))
         {
@@ -32,7 +32,7 @@ public class Gun : MonoBehaviour
             _onFire?.Invoke(_target.transform);
             SoundManager.instance.Play(_gunData.fireSoundName);
             _target.Health.TakeDamage(_gunData.damage);
-            yield return new WaitForSeconds(_gunData.damage);
+            yield return new WaitForSeconds(_gunData.fireRate);
         }
         _target = null;
     }
